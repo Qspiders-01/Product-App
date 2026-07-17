@@ -8,17 +8,22 @@ pipeline {
         }
         stage ('Build') {
             steps {
-                bat 'mvn clean compile'
+                sh 'mvn clean compile'
             }
         }
         stage ('Test') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
             }
         }
         stage ('Package') {
             steps {
-                bat 'mvn package'
+                sh 'mvn package'
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t springpetclinic-demo .'
             }
         }
     }
